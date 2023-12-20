@@ -1,0 +1,102 @@
+linha do arquivo: 5 (platform 1 north) - jump
+ - should be: left
+linha do arquivo: 7 (platform 1 south) - left
+ - should be: right
+linha do arquivo: 8 (platform 1 west) - right
+ - should be: jump
+linha do arquivo: 10 (platform 2 east) - left
+ - should be: right
+linha do arquivo: 12 (platform 2 west) - right
+ - should be: left
+linha do arquivo: 13 (platform 3 north) - right
+ - should be: jump
+linha do arquivo: 15 (platform 3 south) - left
+ - should be: right
+linha do arquivo: 18 (platform 4 east) - left
+ - should be: right
+linha do arquivo: 20 (platform 4 west) - right
+ - should be: jump
+linha do arquivo: 21 (platform 5 north) - left
+ - should be: jump
+linha do arquivo: 23 (platform 5 south) - jump
+ - should be: ['left', 'right']
+linha do arquivo: 24 (platform 5 west) - left
+ - should be: ['right', 'jump']
+linha do arquivo: 26 (platform 6 east) - left
+ - should be: right
+linha do arquivo: 27 (platform 6 south) - jump
+ - should be: right
+linha do arquivo: 29 (platform 7 north) - right
+ - should be: jump
+linha do arquivo: 32 (platform 7 west) - left
+ - should be: ['right', 'jump']
+linha do arquivo: 33 (platform 8 north) - right
+ - should be: left
+linha do arquivo: 34 (platform 8 east) - right
+ - should be: left
+linha do arquivo: 35 (platform 8 south) - left
+ - should be: right
+linha do arquivo: 36 (platform 8 west) - left
+ - should be: jump
+linha do arquivo: 38 (platform 9 east) - right
+ - should be: left
+linha do arquivo: 39 (platform 9 south) - jump
+ - should be: right
+linha do arquivo: 40 (platform 9 west) - right
+ - should be: jump
+linha do arquivo: 43 (platform 10 south) - left
+ - should be: right
+linha do arquivo: 44 (platform 10 west) - left
+ - should be: jump
+linha do arquivo: 46 (platform 11 east) - left
+ - should be: right
+linha do arquivo: 47 (platform 11 south) - left
+ - should be: jump
+linha do arquivo: 50 (platform 12 east) - left
+ - should be: right
+linha do arquivo: 51 (platform 12 south) - left
+ - should be: jump
+linha do arquivo: 55 (platform 13 south) - left
+ - should be: ['right', 'jump']
+linha do arquivo: 56 (platform 13 west) - left
+ - should be: jump
+linha do arquivo: 57 (platform 14 north) - right
+ - should be: jump
+linha do arquivo: 61 (platform 15 north) - left
+ - should be: ['jump', 'right']
+linha do arquivo: 62 (platform 15 east) - right
+ - should be: left
+linha do arquivo: 64 (platform 15 west) - left
+ - should be: right
+linha do arquivo: 69 (platform 17 north) - right
+ - should be: left
+linha do arquivo: 71 (platform 17 south) - left
+ - should be: right
+linha do arquivo: 72 (platform 17 west) - right
+ - should be: jump
+linha do arquivo: 77 (platform 19 north) - right
+ - should be: left
+linha do arquivo: 80 (platform 19 west) - right
+ - should be: jump
+linha do arquivo: 81 (platform 20 north) - right
+ - should be: left
+linha do arquivo: 83 (platform 20 south) - left
+ - should be: right
+linha do arquivo: 84 (platform 20 west) - left
+ - should be: jump
+linha do arquivo: 85 (platform 21 north) - right
+ - should be: jump
+linha do arquivo: 86 (platform 21 east) - right
+ - should be: left
+linha do arquivo: 87 (platform 21 south) - right
+ - should be: left
+linha do arquivo: 89 (platform 22 north) - left
+ - should be: jump
+linha do arquivo: 91 (platform 22 south) - left
+ - should be: right
+linha do arquivo: 92 (platform 22 west) - left
+ - should be: right
+linha do arquivo: 95 (platform 23 south) - left
+ - should be: right
+linha do arquivo: 96 (platform 23 west) - left
+ - should be: jump
