@@ -6,62 +6,52 @@ MATRIX = None
 BOT_ACTIONS = ['left','right','jump']
 BOT_DIRECTIONS = ['north','east','south','west']
 
+#converte as informações 
 def converting_states(state_in_binary: str):
     plat_mask = 0b1111100
     direction_mask = 0b0000011
-
-    int_state = int(state_in_binary, 2) #converte de binário pra decimal
-    #aplica uma mascara de bits e faz um shift right pra que os bits fiquem no local correto
+    int_state = int(state_in_binary, 2) 
     platform = (int_state & plat_mask) >> 2
     direction = (int_state & direction_mask)
-
-    #acha o estado entre 0-95 a partir da direção e plataforma
     state = platform * 4 + direction
     return state
     
-def checker(socket, times: int, start: int):
-    current_state = start * 4
-    total_reward = 0
-
+    
+#Percore apenas pelos melhores caminhos aprendidos, sem alterar a Qtable   
+def checker(socket, steps: int, pos: int):
+    state = pos * 4
+    total = 0
     aux = 0
     while True:
-        #busca na tabela a melhor ação pra esse estado
-        current_action = numpy.where(MATRIX[current_state] == max(MATRIX[current_state]))[0][0]
-
-        #recebe a recompensa e o estado novos a partir da ação escolhida
-        bit_state, reward = cn.get_state_reward(socket, BOT_ACTIONS[current_action])
+        action = numpy.where(MATRIX[state] == max(MATRIX[state]))[0][0]
+        bit_state, reward = cn.get_state_reward(socket, BOT_ACTIONS[action])
         new_state = converting_states(bit_state)
-
-        total_reward += reward
-        current_state = new_state
-
+        total += reward
+        state = new_state
         aux += 1
-        if aux >= times:
+        if aux >= steps:
             break
 
+#Função principal de exploração e aprendizado
 def exploration(socket, movements: int, start: int):
-    current_state = start * 4 # *4, pois cada plataforma tem 4 estados possíveis e sempre respawna virado pro norte
-
+    state = start * 4 
     for step in range(movements):
         print('Step: ' , step)
 
-        #busca na tabela a melhor ação para o estado atual
-        best_known = numpy.where(MATRIX[current_state] == max(MATRIX[current_state]))[0][0]
-        random_action = random.randint(0, 2)
+        best = numpy.where(MATRIX[state] == max(MATRIX[state]))[0][0]
+        random = random.randint(0, 2)
 
-        # seleciona se vai utilizar acao aleatoria ou nao
+        # política de exploration x exploitation
         if step % 5 > 1:
-            current_action = best_known
+            action = best
         else:
-            current_action = random_action
-
-        #recebe a recompensa e o estado novos a partir da ação escolhida
-        bit_state, reward  = cn.get_state_reward(socket, BOT_ACTIONS[current_action])
+            action = random
+        bit_state, reward  = cn.get_state_reward(socket, BOT_ACTIONS[action])
         new_state = converting_states(bit_state)
-        main_equation(reward, current_state, current_action, new_state)
-        current_state = new_state
+        main_equation(reward, state, action, new_state)
+        state = new_state
 
-        #Atualiza a tabela a partir da equacao
+#equação principal
 def main_equation(rec: int, #recompensa
                  ps: int, #estado anterior
                  pa: int, #acao realizada
@@ -72,6 +62,7 @@ def main_equation(rec: int, #recompensa
     MATRIX[ps][pa] += lr * (rec + d * max(MATRIX[cs]) - MATRIX[ps][pa])
     return MATRIX[ps][pa]
 
+#função de inicialização
 def main():
     game = cn.connect(2037)
     global MATRIX
